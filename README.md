@@ -1,0 +1,2 @@
+# progeprojekt
+Meie programmeerimise projekt
