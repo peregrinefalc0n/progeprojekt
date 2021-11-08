@@ -69,15 +69,9 @@ class EventDataList:
         for i in self.datalist:
             if(i.name == name):
                 return i
-    
-    def updateData(self):
-        
-        templist = []
-        with open("db.txt", "r", encoding="UTF-8") as db:
-            for line in db:
-                templist.append(line.strip())
+
 
 #TODO
-#file read in method
+#file read in method (make them in mvc.py)
 #translate line to object method for use in read in method
 #other getters setters etc
