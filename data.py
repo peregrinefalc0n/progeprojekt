@@ -17,7 +17,7 @@ class MITSEventFull:
         self.participants = participants
         #The description of the event
         self.description = description
-    
+
     def toDictionary(self):
         return dict({'name': self.name,
                     'startdate': self.startdate,
@@ -52,7 +52,16 @@ class EventDataList:
     def removeEvent(self, event):
         self.datalist.remove(event)
 
-    def toList(self):
-        x = []
-        return x.extend(self.datalist)
+    def toString(self):
+        s = f'id: {self.id}, '
+        for i in self.datalist:
+            s += str(i.toDictionary()) + ', '
+        return s
 
+    def getLastEvent(self):
+        return self.datalist.pop()
+    
+    def getEventByName(self, name):
+        for i in self.datalist:
+            if(i.name == name):
+                return i
