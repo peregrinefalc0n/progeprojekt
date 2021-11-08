@@ -1,5 +1,6 @@
 
 from veebileht.models import Event
+from datetime import *
 
 #This file contains methods for manipulating database to display
 #data in the webpage, to "translate" data from db to webpage
@@ -55,9 +56,7 @@ def removeEvent(name):
     t.delete()
 
 
-#this method is currently temporarily used in views.py to display data
-def execute():
-    addEvent("lol", 1, 2)
-    addEvent("lmao", 10000)
-
-    return getAllEventsDetails()
+#this method is currently temporarily used in views.py to display data for testing purposes
+def testMethod():
+    addEvent("Rooside sõda", 4500000)
+    addEvent("Mälumäng", 56000000)

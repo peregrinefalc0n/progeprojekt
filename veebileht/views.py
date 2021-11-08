@@ -11,10 +11,12 @@ import datetime
 
 def returnwebpage(request):
 
+    testMethod()
+
     #get max three events with only their name and date
     allevents = getAllEventsDetails()
 
-
+    days = ['Esmaspäeval', 'Teisipäevaö', 'Kolmapäeval', 'Neljapäeval', 'Reedel', 'Laupäeval', 'Pühapäeval']
 
     threeevents = []
     n=0
@@ -23,15 +25,15 @@ def returnwebpage(request):
             break
         else:
             date = datetime.datetime.fromtimestamp(allevents[i]['starttime'])
-            s = f"Üritus {allevents[i]['name']} toimub {date} "
+            s = f"Üritus {allevents[i]['name']} toimub {days[date.weekday()]} {date.day}.{date.month} kell {date.time()}"
             threeevents.append(s)
         n += 1
-
+    
     ev1 = ''
     ev2 = ''
     ev3 = ''
-
     l = len(threeevents)
+
     if(l == 1):
         ev1 = threeevents[0]
     elif(l == 2):
@@ -42,6 +44,14 @@ def returnwebpage(request):
         ev2 = threeevents[1]
         ev3 = threeevents[2]    
 
+
+    alleventsstring = ""
+
+    for i in allevents:
+        date = datetime.datetime.fromtimestamp(allevents[i]['starttime'])
+        s = f"Ürituse nimi: {allevents[i]['name']} \n Algab: {days[date.weekday()]} {date.day}.{date.month} kell {date.time()}"
+        alleventsstring = alleventsstring + s + '\n'      
+
     filldata = {
         #site heading
         'heading' : 'IT Üritused',
@@ -50,7 +60,7 @@ def returnwebpage(request):
         'ev2': ev2,
         'ev3': ev3,
         #main event list of ALL upcoming events
-        'events' : allevents
+        'events' : alleventsstring
         #
     }
 
