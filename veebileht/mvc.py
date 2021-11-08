@@ -11,29 +11,61 @@ import copy
 #delete
 
 def addEntry(datafile, entry):
-    with open(datafile, 'a', encoding='UTF-8') as db:
-        db.write(entry)
+    try:
+        with open(datafile, 'a', encoding='UTF-8') as db:
+            db.write(str(entry) + '\n')
+    except Exception as e:
+        print(e)
 
-#find entry with given name
+
+#find entry with the exact name, if not found, returns False
 def readEntry(datafile, entryname):
-   with open(datafile, 'a', encoding='UTF-8') as db:
-       for line in db:
-           linedata = eval(line.strip())
-           if linedata
-    
+    try:
+        with open(datafile, 'r', encoding='UTF-8') as db:
+            for line in db:
+                if line == '\n':
+                    break
+                else:
+                    linedata = eval(line.strip())
+                    if linedata['eventname'] == entryname:
+                        return linedata
+                    else:
+                        return False
+    except Exception as e:
+        print(e)
+
 def readAllEntry(datafile):
-    templist = []
-    with open(datafile, "r", encoding="UTF-8") as db:
-        for line in db:
-            templist.append(eval(line.strip()))
+    
+    try:
+        templist = []
+        with open(datafile, "r", encoding="UTF-8") as db:
+            for line in db:
+                if line == '\n':
+                    break
+                else:
+                    templist.append(eval(line.strip()))
 
-    ret = classes.EventDataList(vars.getNewID())
-    ret.datalist = copy.deepcopy(templist)
+        ret = classes.EventDataList(vars.getNewID())
+        ret.datalist = copy.deepcopy(templist)
 
-    return ret
+        return ret
+    except Exception as e:
+        print(e)
+
+
 
 def updateEntry(entry):
-    pass
+    
+    try:
+        pass
+    except Exception as e:
+        print(e)
+
+
 
 def deleteEntry(entry):
-    pass
+    
+    try:
+        pass
+    except Exception as e:
+        print(e)
