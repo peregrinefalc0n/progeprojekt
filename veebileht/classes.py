@@ -1,5 +1,8 @@
 
-#A full version of the event class
+#!!!
+#Because we are using the models.py, these are currently unused 
+
+# A full version of the event class
 class MITSEventFull:
     def __init__(self, name, startdate, starttime, enddate, endtime, participants, description):
        
@@ -18,15 +21,6 @@ class MITSEventFull:
         #The description of the event
         self.description = description
 
-    def toDictionary(self):
-        return dict({'name': self.name,
-                    'startdate': self.startdate,
-                    'starttime': self.starttime,
-                    'enddate': self.enddate,
-                    'endtime': self.endtime,
-                    'participants': self.participants,
-                    'description': self.description})
-
 
 
 #Simple version of the event with only name, date and time
@@ -40,38 +34,9 @@ class MITSEventSimple:
         #Starting time of the event, always exists
         self.starttime = starttime
 
-    def toDictionary(self):
-        return dict({'name': self.name, 'startdate': self.startdate, 'starttime': self.starttime})
 
-
-
+#Simple EventList class
 class EventDataList:
     def __init__(self, id):
         self.id = id
         self.datalist = []
-
-    def addEvent(self, event):
-        self.datalist.append(event)
-
-    def removeEvent(self, event):
-        self.datalist.remove(event)
-
-    def toString(self):
-        s = f'id: {self.id}, '
-        for i in self.datalist:
-            s += str(i.toDictionary()) + ', '
-        return s
-
-    def getLastEvent(self):
-        return self.datalist.pop()
-    
-    def getEventByName(self, name):
-        for i in self.datalist:
-            if(i.name == name):
-                return i
-
-
-#TODO
-#file read in method (make them in mvc.py)
-#translate line to object method for use in read in method
-#other getters setters etc

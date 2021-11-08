@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from veebileht.translate import execute
+from veebileht.models import Event
 # Create your views here.
 
 #req - resp 
@@ -7,4 +9,4 @@ from django.http import HttpResponse
 #its a request handler
 
 def returnwebpage(request):
-    return render(request, 'index.html', {'name': 'Robert'})
+    return render(request, 'index.html', {'events': execute()})
