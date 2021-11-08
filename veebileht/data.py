@@ -27,6 +27,8 @@ class MITSEventFull:
                     'participants': self.participants,
                     'description': self.description})
 
+
+
 #Simple version of the event with only name, date and time
 class MITSEventSimple:
     def __init__(self, name, startdate, starttime):
@@ -40,6 +42,8 @@ class MITSEventSimple:
 
     def toDictionary(self):
         return dict({'name': self.name, 'startdate': self.startdate, 'starttime': self.starttime})
+
+
 
 class EventDataList:
     def __init__(self, id):
@@ -65,3 +69,15 @@ class EventDataList:
         for i in self.datalist:
             if(i.name == name):
                 return i
+    
+    def updateData(self):
+        
+        templist = []
+        with open("db.txt", "r", encoding="UTF-8") as db:
+            for line in db:
+                templist.append(line.strip())
+
+#TODO
+#file read in method
+#translate line to object method for use in read in method
+#other getters setters etc
