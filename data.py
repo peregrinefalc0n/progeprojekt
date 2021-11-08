@@ -18,8 +18,7 @@ class MITSEventFull:
         #The description of the event
         self.description = description
     
-    @property
-    def asDictionary(self):
+    def toDictionary(self):
         return dict({'name': self.name,
                     'startdate': self.startdate,
                     'starttime': self.starttime,
@@ -39,6 +38,21 @@ class MITSEventSimple:
         #Starting time of the event, always exists
         self.starttime = starttime
 
-    @property
-    def asDictionary(self):
+    def toDictionary(self):
         return dict({'name': self.name, 'startdate': self.startdate, 'starttime': self.starttime})
+
+class EventDataList:
+    def __init__(self, id):
+        self.id = id
+        self.datalist = []
+
+    def addEvent(self, event):
+        self.datalist.append(event)
+
+    def removeEvent(self, event):
+        self.datalist.remove(event)
+
+    def toList(self):
+        x = []
+        return x.extend(self.datalist)
+
