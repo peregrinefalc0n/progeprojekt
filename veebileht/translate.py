@@ -13,7 +13,7 @@ from veebileht.models import Event
 #    description = models.TextField(blank=True, null=True)
 #    participants = models.IntegerField(blank=True, null=True)
 
-
+#get a dict of all events in db
 def getAllEventsDetails():
     e = Event.objects.all()
     ret = {}
@@ -28,7 +28,7 @@ def getAllEventsDetails():
     return ret
 
 
-
+#get the details of a single event by event name string
 def getEventDetails(eventname):
     e = Event.objects.filter(name = eventname)[0].__dict__
     ret = {}
@@ -40,7 +40,7 @@ def getEventDetails(eventname):
     return ret
 
 
-
+#adds the new event to db
 def addEvent(name, starttime, endtime = None, description = None, participants = None):
     if not Event.objects.filter(name = name).exists():
         event = Event(name = name, starttime = starttime, endtime = endtime, description = description, participants = participants)
@@ -49,7 +49,7 @@ def addEvent(name, starttime, endtime = None, description = None, participants =
         print("Event already exists.")
 
 
-
+#deletes the specified event from db
 def removeEvent(name):
     t = Event.objects.filter(name = name)
     t.delete()
