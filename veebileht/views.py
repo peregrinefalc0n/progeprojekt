@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from veebileht.translate import *
 from veebileht.models import Event
 import datetime
+from veebileht.background import run_scheduled
 # Create your views here.
 
 #req - resp 
@@ -12,6 +13,10 @@ import datetime
 def returnwebpage(request):
 
     testMethod()
+    run_scheduled()
+
+    #test print
+    print('page was accessed')
 
     #get max three events with only their name and date
     allevents = getAllEventsDetails()
