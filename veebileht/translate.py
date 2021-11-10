@@ -60,3 +60,4 @@ def removeEvent(name):
 def testMethod():
     addEvent("Rooside sõda", 4500000)
     addEvent("Mälumäng", 56000000)
+    addEvent("Arturi kallistamine", 90880008)
