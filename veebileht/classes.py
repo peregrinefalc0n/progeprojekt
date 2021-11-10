@@ -25,14 +25,13 @@ class MITSEventFull:
 
 #Simple version of the event with only name, date and time
 class MITSEventSimple:
-    def __init__(self, name, startdate, starttime):
+    def __init__(self, name, time):
 
         #Name of the event, always exists
         self.name = name
         #Starting date of the event, always exists
-        self.startdate = startdate
-        #Starting time of the event, always exists
-        self.starttime = starttime
+        self.time = time
+
 
 
 #Simple EventList class

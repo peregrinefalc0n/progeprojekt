@@ -10,3 +10,4 @@ class Event(models.Model):
     description = models.TextField(blank=True, null=True)
     participants = models.IntegerField(blank=True, null=True)
 
+#addEvent(name, starttime, endtime = None, description = None, participants = None):
