@@ -6,11 +6,13 @@ import time
 
 @background(schedule=60)
 def run_scheduled():
-    time.sleep(1)
+
+    for i in range(60,0, -1):
+        print(i, 'seconds until scrape')
+        time.sleep(1)
+
     print('Running scheduled scrape')
     datamatrix = scraper.scrape_page()
     
     #TODO proper data read-in from datamatrix
-    for i in len(datamatrix[2]):
-        addEvent(datamatrix[0][i], datamatrix[1][i])
-
+    print(datamatrix)
