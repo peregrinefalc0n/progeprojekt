@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Add a gray background color with some padding */
+  body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  
+  /* Header/Blog Title */
+  .header {
+    padding: 30px;
+    font-size: 35px;
+    text-align: center;
+    color: rgb(80, 110, 175);
+    /*background-image: url("../images/beans.jfif");*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  /* Left column */
+  .contentbar {   
+    float: left;
+    width: 75%;
+  }
+
+  /* Right column */
+  .navbar {
+    float: left;
+    width: 100%;
+    text-align: left;
+  }
+
+  .sidebar {
+    float: right;
+    width: 25%;
+    position: sticky;
+    top: 0;
+  }
+
+  /* Add a card effect for articles */
+  .topic {
+     background-color: white;
+     padding: 20px;
+     margin-top: 20px;
+     text-align: justify;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
+
+  .pic {
+    width: 100%;
+  }
+  .navbutton {
+    border: 2px;
+    color: brown;
+    text-decoration: solid;
+    border: rgb(0, 0, 0);
+    float: inline-end;
+    position: relative;
+    display: contents;
+    font-size: 20px;
+    border-radius: 20px;
+    }
+  
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .navbar, .contentbar, .sidebar {   
+      width: 100%;
+      padding: 0;
+    }
+  }
