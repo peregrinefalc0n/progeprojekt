@@ -35,32 +35,39 @@ def scrape_page(browser, currentpage):
     time.sleep(5)
     html = browser.page_source
     soup = BeautifulSoup(html, 'html.parser')
-
+    temp = []
     event_dict = {}
 
-    for i in soup.find_all(class_=constants.cons['mains']):
-    
-        if str(constants.cons['dates_class']) in str(i):
-            event_dict['Page_Name'] = constants.cons['current_page'].text
+    for z in soup.find(class_ = 'rq0escxv l9j0dhe7 du4w35lb hybvsw6c io0zqebd m5lcvass fbipl8qg nwvqtn77 k4urcfbm ni8dbmo4 stjgntxs sbcfpzgs'):
+        for i in z.find_all(class_=constants.cons['mains']):
+        #print(i)
+            if str(constants.cons['dates_class']) in str(i):
+            
+            #for x in i.find_all(class_ = constants.cons['current_page']):
+            #    event_dict["Current_Page"] = x.text
 
-            for j in i.find_all(class_=constants.cons['names_class']):
-                
-                if not len(j.text) == '':
-                    event_dict["Event_Name"] = j.text
-                else:
-                    event_dict["Event_Name"] = 'NONE'
-            for g in i.find_all(class_=constants.cons['place_class']):
-                if not len(g.text) == '':
-                    event_dict["Event_Place"] = g.text
-                else:
-                    event_dict["Event_Place"] = 'NONE'
-            for h in i.find_all(class_=constants.cons['dates_class']):
-                if not len(h.text) == '':
-                    event_dict["Event_Time"] = h.text
-                else:
-                    event_dict["Event_Time"] = 'NONE'
+                for j in i.find_all(class_=constants.cons['names_class']):
 
-    return event_dict
+                    if not len(j.text) == '':
+                        event_dict["Event_Name"] = j.text
+                        #print(j.text)
+                    else:
+                        event_dict["Event_Name"] = 'NONE'
+                for g in i.find_all(class_=constants.cons['place_class']):
+                    if not len(g.text) == '':
+                        event_dict["Event_Place"] = g.text
+                    else:
+                        event_dict["Event_Place"] = 'NONE'
+                for h in i.find_all(class_=constants.cons['dates_class']):
+                    if not len(h.text) == '':
+                        event_dict["Event_Time"] = h.text
+                        #print(h)
+                    else:
+                        event_dict["Event_Time"] = 'NONE'
+                temp.append(event_dict)
+
+
+    return temp
 
 login_ = login()
 event_dict = []
