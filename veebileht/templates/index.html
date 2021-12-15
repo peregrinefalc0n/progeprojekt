@@ -1,25 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/style.css">
     <title>IT Üritused</title>
 </head>
+
 <body>
     <main>
-        <div id='heading'>
+        <div class='header'>
             <h2>{{heading}}</h2>
         </div>
-        <div id='quickview'>
-            {{ev1}}
-            <br>
-            {{ev2}}
-            <br>
-            {{ev3}}
-            <br>
-        </div>
-        <div id='allevents'>
-            {{events}}
-        </div>
+        <div class="row">
+            <div class="contentbar">
+
+                <div class="topic">
+                    <h3 class="topic-title">
+                        {{ev1}}
+                    </h3>
+                    <p class="topic-text">
+
+                    </p>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">
+                        {{ev2}}
+                    </h3>
+                    <p class="topic-text">
+
+                    </p>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">
+                        {{ev3}}
+                    </h3>
+                    <p class="topic-text">
+
+                    </p>
+                </div>
+
+                <div class="topic">
+
+                    <div id='quickview'>
+                        {{ev1}}
+                        <br>
+                        {{ev2}}
+                        <br>
+                        {{ev3}}
+                        <br>
+                    </div>
+
+                </div>
+                <div class="topic">
+
+                    <div id='allevents'>
+                        {{events}}
+                    </div>
+
+                </div>
     </main>
 </body>
+
 </html>
