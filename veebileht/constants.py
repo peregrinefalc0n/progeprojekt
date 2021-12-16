@@ -28,5 +28,6 @@ cons = {
 #scraper delay in seconds
 #set as any int > 0 for override, or 0 for normal operation
 timings = {
-    'delay' : 10
+    'delay' : 600,
+    'threadvar': False
 }

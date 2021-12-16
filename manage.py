@@ -2,14 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import threading
-from veebileht import background
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'progeprojekt.settings')
     try:
         from django.core.management import execute_from_command_line
+
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
@@ -20,9 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-
     main()
-
-    x = threading.Thread(target=background.run_scheduled)
-    print("Starting background thread")
-    x.start()

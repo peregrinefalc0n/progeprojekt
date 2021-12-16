@@ -19,6 +19,18 @@ from datetime import *
 #get a dict of all events in db
 def getAllEventsDetails():
     e = Event.objects.all()
+
+    retnew = []
+
+    for event in e:
+        dicto = {}
+        dicto['name'] = event.name
+        dicto['place'] = event.place
+        dicto['time'] = event.time
+        retnew.append(dicto)
+
+    return retnew
+
     ret = {}
     for obj in e:
         a = obj.__dict__
