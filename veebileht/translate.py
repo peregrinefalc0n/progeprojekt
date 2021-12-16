@@ -5,14 +5,16 @@ from datetime import *
 #This file contains methods for manipulating database to display
 #data in the webpage, to "translate" data from db to webpage
 
-
-#for reference:
+#For reference
+#Event class is defined here as a class/model
 #class Event(models.Model):
-#    name = models.TextField()
-#    starttime = models.IntegerField()
-#    endtime = models.IntegerField(blank=True, null=True)
-#    description = models.TextField(blank=True, null=True)
-#    participants = models.IntegerField(blank=True, null=True)
+    #name = models.TextField()
+    #time = models.TextField(blank=True, null=True)
+    #place = models.TextField(blank=True, null=True)
+
+
+#addEvent(name, time = None, place = None):
+
 
 #get a dict of all events in db
 def getAllEventsDetails():
@@ -42,9 +44,9 @@ def getEventDetails(eventname):
 
 
 #adds the new event to db
-def addEvent(name, starttime, endtime = None, description = None, participants = None):
+def addEvent(name, time = None, place = None):
     if not Event.objects.filter(name = name).exists():
-        event = Event(name = name, starttime = starttime, endtime = endtime, description = description, participants = participants)
+        event = Event(name = name, time = time, place = place)
         event.save()
     else:
         print("Event already exists.")
@@ -61,3 +63,8 @@ def testMethod():
     addEvent("Rooside sõda", 4500000)
     addEvent("Mälumäng", 56000000)
     addEvent("Arturi kallistamine", 90880008)
+
+def testRemoveMethod():
+    removeEvent("Rooside sõda")
+    removeEvent("Mälumäng")
+    removeEvent("Arturi kallistamine")

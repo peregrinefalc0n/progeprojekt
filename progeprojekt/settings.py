@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'background_task',
+    #'background_task',
     'veebileht',
 ]
 
@@ -125,6 +125,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRONJOBS = [
-    ('*/1 * * * *', 'python manage.py process_tasks')
-]
+#CRONJOBS = [
+#    ('*/1 * * * *', 'python manage.py process_tasks')
+#]

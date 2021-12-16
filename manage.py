@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import threading
+from veebileht import background
 
 def main():
     """Run administrative tasks."""
@@ -19,4 +20,9 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
+
+    x = threading.Thread(target=background.run_scheduled)
+    print("Starting background thread")
+    x.start()

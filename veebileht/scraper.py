@@ -1,89 +1,73 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup as bs
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
-from veebileht import constants
-# other necessary ones
+import veebileht.constants
 from bs4 import BeautifulSoup
+option = Options()
+option.add_argument("--disable-infobars")
+option.add_argument("start-maximized")
+option.add_argument("--disable-extensions")
+option.add_experimental_option('excludeSwitches', ['enable-logging'])
+from random import randint
 
+def run():
 
-def scrape_page():
-    
-    option = Options()
-    option.add_argument("--disable-infobars")
-    option.add_argument("start-maximized")
-    option.add_argument("--disable-extensions")
-
-    browser = webdriver.Chrome(executable_path="veebileht\webdriver\chromedriver.exe", options=option)
+    s = Service("veebileht\webdriver\chromedriver.exe")
+    browser = webdriver.Chrome(service = s, options=option)
     browser.get("http://facebook.com")
     browser.maximize_window()
     wait = WebDriverWait(browser, 30)
     email_field = wait.until(EC.visibility_of_element_located((By.NAME, 'email')))
-    email_field.send_keys(constants.EMAIL)
+    email_field.send_keys(veebileht.constants.account['email'])
     pass_field = wait.until(EC.visibility_of_element_located((By.NAME, 'pass')))
-    pass_field.send_keys(constants.PASSWORD)
+    pass_field.send_keys(veebileht.constants.account['pass'])
     pass_field.send_keys(Keys.RETURN)
     time.sleep(5)
 
-    browser.get('https://www.facebook.com/MITS.ATI/events/?ref=page_internal')
-    time.sleep(5)
-    html = browser.page_source
-    soup = BeautifulSoup(html, 'html.parser')
-        
-    name_list = []
-    place_list = []
-    date_list = []
+    event_list = []
 
-    for i in soup.find_all(class_=constants.mains):
+    for i in range(len(veebileht.constants.pages)):
+        currentpage = (list(veebileht.constants.pages.values()))[i]
+        browser.get(currentpage)
+        time.sleep(5)
+        html = browser.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+        temp = []
+        event_dict = {}
 
-        #j => Event name
-        for j in i.find_all(class_=constants.names_class):
-        #g => Event Place
-            if not len(j.text) == '':
-                name_list.append(j.text)
-            else:
-                name_list.append('NONE')
-        for g in i.find_all(class_=constants.place_class):
-            if not len(g.text) == '':
-                place_list.append(g.text)
-            else:
-                place_list.append('NONE')
-        for h in i.find_all(class_=constants.dates_class):
-        
-            if not len(h.text) == '':
-                date_list.append(h.text)
-            else:
-                date_list.append('NONE')
-        
+        for z in soup.find(class_ = 'rq0escxv l9j0dhe7 du4w35lb hybvsw6c io0zqebd m5lcvass fbipl8qg nwvqtn77 k4urcfbm ni8dbmo4 stjgntxs sbcfpzgs'):
+            for i in z.find_all(class_=veebileht.constants.cons['mains']):
+            #print(i)
+                if str(veebileht.constants.cons['dates_class']) in str(i):
+                
+                #for x in i.find_all(class_ = constants.cons['current_page']):
+                #    event_dict["Current_Page"] = x.text
 
-    retlist = [name_list, place_list, date_list]
+                    for j in i.find_all(class_=veebileht.constants.cons['names_class']):
 
-    return retlist
+                        if not len(j.text) == '':
+                            event_dict["Event_Name"] = j.text
+                            #print(j.text)
+                        else:
+                            event_dict["Event_Name"] = 'NONE'
+                    for g in i.find_all(class_=veebileht.constants.cons['place_class']):
+                        if not len(g.text) == '':
+                            event_dict["Event_Place"] = g.text
+                        else:
+                            event_dict["Event_Place"] = 'NONE'
+                    for h in i.find_all(class_=veebileht.constants.cons['dates_class']):
+                        if not len(h.text) == '':
+                            event_dict["Event_Time"] = h.text
+                            #print(h)
+                        else:
+                            event_dict["Event_Time"] = 'NONE'
+                    temp.append(event_dict)
+        event_list.append(temp)
 
-
-#GET INFO FROM THESE CLASSES
-
-#print([item.text for item in soup.find_all(class_=mains)])
-
-###DATES 
-#print([item.text for item in soup.find_all(class_=names_class)])
-#print([item.text for item in soup.find_all(class_=dates_class)])
-#print([item.text for item in soup.find_all(class_=place_class)])
-
-#for i in soup.find_all('div', attrs={'class': mains}):
-#    i_descendants = i.descendants
-#    for d in i_descendants:
-#        if d.name == 'div' and d.get('class', '') == [dates_class]:
-#            print(d.text)
-#
-#div = soup.find_all('div', {'class': mains})
-#for i in div:
-#    print(*i.descendants)
-
-            
-    
-
+    return event_list
